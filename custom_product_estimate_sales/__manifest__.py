@@ -3,7 +3,6 @@
     'version': '1.0',
     'category': 'Sales',
     'license': 'LGPL-3',
-    'author':'Leonardo LLanes',
     'summary': 'Adds a custom tab to sales order template',
     'depends': ['base','product','sale'],
     'data': [

@@ -13,9 +13,9 @@
         'views/assets.xml',
         'reports/report_estimate.xml'
     ],
-    'author': 'anil.pattel136@gmail.com',
-    'company': 'CoderCare IT Solution',
-    'website': 'https://codercareitsolution.odoo.com/',
+    'author': '',
+    'company': '',
+    'website': '',
     'license': 'LGPL-3',
     'images': [],
     'demo': [],
