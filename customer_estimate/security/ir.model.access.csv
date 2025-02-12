@@ -1,0 +1,8 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+customer_estimate.access_customer_estimate,access_customer_estimate,customer_estimate.model_customer_estimate,base.group_user,1,1,1,1
+customer_estimate.access_product_code,access_product_code,customer_estimate.model_product_code,base.group_user,1,1,1,1
+customer_estimate.access_inventory_code,access_inventory_code,customer_estimate.model_inventory_code,base.group_user,1,1,1,1
+customer_estimate.access_estimate_pricing_line,access_estimate_pricing_line,customer_estimate.model_estimate_pricing_line,base.group_user,1,1,1,1
+customer_estimate.access_estimate_material_line,access_estimate_material_line,customer_estimate.model_estimate_material_line,base.group_user,1,1,1,1
+customer_estimate.access_workcenter_template,access_workcenter_template,customer_estimate.model_workcenter_template,base.group_user,1,1,1,1
+customer_estimate.access_estimate_work_center,access_estimate_work_center,customer_estimate.model_estimate_work_center,base.group_user,1,1,1,1

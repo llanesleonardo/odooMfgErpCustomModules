@@ -1,0 +1,506 @@
+<odoo>
+    <data>
+        <template id="report_custom_saleorder4">
+            <t t-call="web.html_container">
+                <div style="margin-top: 0px;">
+                    <t t-set="data_report_margin_top" t-value="10" />
+                    <t t-foreach="docs" t-as="o">
+                        <t t-foreach="o.manufactured_product_ids" t-as="mfprod">
+                            <t t-call="web.external_layout">
+                                <div class="page" style='font-size:14px'>
+                                    <!-- Report Title -->
+                                    <!-- Columns Section -->
+                                    <div class="row" style="margin-top: 30px;">
+                                        <!-- Left Column -->
+                                        <div class="col-6">
+                                            <h1
+                                                style="text-align: center; font-size: 24px; margin: 20px 20px;">
+                                                Job traveler - Shop Copy
+                                            </h1>
+                                            <h1
+                                                style="text-align: center; font-size: 24px; margin: 20px 20px;">Special
+                                                carbide Tools Inc. </h1>
+                                        </div>
+                                        <div class="col-6">
+                                            <h1
+                                                style="text-align: right; font-size: 24px; margin: 20px 20px;">
+                                                Job Number: <span t-field="mfprod.job_number" />
+                                            </h1>
+                                        </div>
+                                    </div>
+                                    <t t-set="prodquantity" t-value="1" />
+                                    <div>
+                                        <t t-if="len(docs) == 1">
+                                            <t t-set="doc" t-value="docs[0]" />
+                                            <div class="page">
+                                                <t t-foreach="mfprod" t-as="orderline">
+
+                                                    <!-- Columns Section -->
+                                                    <div class="row" style="margin-top: 30px; background-color:lightgray; padding:10px">
+                                                        <!-- Left Column -->
+                                                        <div class="col-4">
+                                                            <h1
+                                                                style="text-align: left; font-size: 18px; margin: 10px 5px;">
+                                                                Part number: <span
+                                                                    t-field="orderline.product_id" /></h1>
+                                                            <p
+                                                                style="font-weight:bold; margin: 10px 5px;">
+                                                                Order: <span
+                                                                    t-field="doc.name" /></p>
+                                                            <p
+                                                                style="font-weight:bold; margin: 10px 5px;">
+                                                                Description:</p>
+                                                            <p
+                                                                style="font-weight:bold; margin: 10px 5px;">
+                                                                Customer: <t
+                                                                    t-esc="o.linked_quote_id.customer_id.name" /></p>
+                                                            <p
+                                                                style="font-weight:bold; margin: 10px 5px;">Qty
+                                                                to make: <span
+                                                                    t-field="orderline.quantity" /></p>
+
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <h1
+                                                                style="text-align: left; font-size: 18px; margin: 10px 5px;">
+                                                                Revision:</h1>
+
+                                                            <p
+                                                                style="font-weight:bold; margin: 10px 5px;">PO
+                                                                Num: </p>
+                                                            <p
+                                                                style="font-weight:bold; margin: 10px 5px;">Qty
+                                                                Posted: 0 </p>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <h1
+                                                                style="text-align: left; font-size: 18px; margin: 10px 5px;">
+                                                                Rev Date: <span
+                                                                    t-field="doc.create_date" /></h1>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div>
+                                                        <p>
+                                                            <span
+                                                                t-field="orderline.description" />
+                                                        </p>
+                                                    </div>
+                                                    <div style=' text-decoration:underline;'>
+                                                                                            <h1
+                                                        style="text-align: center; font-size: 24px; margin: 20px 20px;">
+                                                        Job Notes</h1>
+                                                    </div>
+                                                    <span
+                                                        t-field="orderline.description" />
+                                                </t>
+
+
+                                            </div>
+                                        </t>
+                                    </div>
+
+                                    <br />
+                                    <h1
+                                        style="text-align: center; font-size: 24px; margin: 5px 20px;">
+                                        Delivery Schedule</h1>
+                                    <table
+                                        class=""
+                                        style="width:100%;border-top:1px solid lightgray; ">
+                                        <thead>
+                                            <tr style='border-bottom:0px solid black'>
+                                                <th
+                                                    style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold ; text-align:left">
+                                                    Order Quantity</th>
+                                                <!-- <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold ;
+                                        text-align:left">
+                                            Release Type
+                                        </th>-->
+                                                <th
+                                                    style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold ; text-align:left">
+                                                    Release Quantity
+                                                </th>
+                                                <th
+                                                    style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold; text-align:left">
+                                                    Due Date
+                                                </th>
+
+                                                <!--  <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold;
+                                        text-align:left">
+                                            Ship Date</th>-->
+                                                <!-- <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold;
+                                        text-align:left">
+                                            Packing List</th>-->
+                                                <!-- <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold;
+                                        text-align:left">
+                                            MFG Job No</th>-->
+                                                <!-- <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold;
+                                        text-align:left">
+                                            Destination Job No</th>-->
+                                                <th
+                                                    style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold; text-align:left">
+                                                    Comments</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-set="counter" t-value="1" />
+                                            <t t-foreach="mfprod" t-as="line">
+                                                <div>
+                                                    <tr style=''>
+                                                        <td
+                                                            style="border-bottom: 0px solid black; text-align: left; ">
+                                                            <t t-set='prodquantity'
+                                                                t-value='line.quantity' />
+                                                            <span
+                                                                t-field="line.quantity" />
+                                                        </td>
+                                                        <!--  <td
+                                                    style="border-bottom: 0px solid black; text-align: left; ">
+
+                                                    <span />
+                                                </td> -->
+                                                        <td
+                                                            style="border-bottom: 0px solid black; text-align: left; ">
+
+                                                            <span
+                                                                t-field="line.quantity" />
+                                                        </td>
+                                                        <td
+                                                            style="border-bottom: 0px solid black; text-align: left; ">
+
+                                                            <span
+                                                                t-field="line.schedule_date" />
+                                                        </td>
+                                                        <td>
+                                                            Comments
+                                                        </td>
+
+                                                    </tr>
+                                                    <!-- Add <hr /> outside of the <tr> but inside
+                                                    the
+                                            <tbody> -->
+
+
+                                                </div>
+                                            </t>
+                                        </tbody>
+                                    </table>
+
+                                    <h1
+                                        style="text-align: center; font-size: 24px; margin: 20px 20px;">
+                                        Routing</h1>
+                                    <br />
+                                    <t t-if="len(docs) == 1">
+                                        <t t-set="doc" t-value="docs[0]" />
+                                        <table
+                                            class=""
+                                            style="width:100%;border-top:1px solid lightgray;  ">
+                                            <tbody>
+
+                                                <div>
+                                                    <tr style=''>
+                                                        <td
+                                                            style="border-bottom: 0px solid black; text-align: left; font-weight:bold; ">
+                                                            Routed By: <span
+                                                                t-field="doc.user_id" />
+                                                        </td>
+
+                                                        <td
+                                                            style="border-bottom: 0px solid black; text-align: right;font-weight:bold;  ">
+                                                            <t t-set="counter" t-value="1" />
+                                                            <t t-foreach="mfprod" t-as="line"> Run
+                                                                Quantity: <span
+                                                                    t-field="line.quantity" />
+                                                            </t>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- Add <hr /> outside of the <tr> but inside
+                                                    the
+                                            <tbody> -->
+
+
+                                                </div>
+
+                                            </tbody>
+                                        </table>
+                                    </t>
+                                    <br />
+                                    <t t-set="total_setup_time"
+                                        t-value="0" />
+                                    <t t-set='total_setup_time_hours_piece' t-value="0" />
+                                    <table
+                                        class=""
+                                        style="width:100%;  border-collapse: collapse;">
+                                        <thead>
+                                            <tr style='border-bottom:0px solid black'>
+                                                <th
+                                                    style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold ; text-align:left">
+                                                    Step No</th>
+                                                <th
+                                                    style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold ; text-align:left">
+                                                    Description
+                                                </th>
+                                                <th
+                                                    style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold ; text-align:left">
+                                                    Setup Time
+                                                </th>
+                                                <th
+                                                    style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold; text-align:left">
+                                                    Cycle Time
+                                                </th>
+
+                                                <th
+                                                    style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold; text-align:left">
+                                                    Total Time</th>
+                                                <!--  <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold;
+                                        text-align:left">
+                                            Pieces Per Hour</th>-->
+                                                <!--   <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold;
+                                        text-align:left">
+                                            Start</th>-->
+                                                <!--   <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold;
+                                        text-align:left">
+                                            End</th>-->
+                                                <!--   <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold;
+                                        text-align:left">
+                                            Run Quantity</th>-->
+                                            </tr>
+                                        </thead>
+                                        <tbody style='border-bottom:1px solid lightgray;'>
+                                            <t t-set="counter" t-value="1" />
+
+                                            <t
+                                                t-foreach="mfprod.product_id.product_tmpl_id.estimate_ids.work_center_ids"
+                                                t-as="workcenter">
+                                                <div>
+
+                                                    <t t-set="total_time"
+                                                        t-value="workcenter.setup_time + workcenter.cycle_time" />
+                                                    <t t-set="total_setup_time"
+                                                        t-value="total_setup_time + workcenter.setup_time" />
+                                                    <tr style=''>
+                                                        <td>
+
+                                                        </td>
+                                                        <td>
+                                                            <span t-field='workcenter.display_name' />
+
+                                                        </td>
+                                                        <td
+                                                            style="border-bottom: 0px solid black; text-align: left; ">
+                                                            <span t-field='workcenter.setup_time' />
+                                                            <span t-field='workcenter.setup_unit' />
+                                                        </td>
+                                                        <td
+                                                            style="border-bottom: 0px solid black; text-align: left; ">
+                                                            <span t-field='workcenter.cycle_time' />
+                                                            <span t-field='workcenter.setup_unit' />
+                                                        </td>
+                                                        <td
+                                                            style="border-bottom: 0px solid black; text-align: left; ">
+                                                            <span t-esc="total_time/60"
+                                                                t-options='{"widget": "float", "precision": 2}' />
+                                                        </td>
+                                                        <td>
+                                                        </td>
+                                                        <td>
+                                                        </td>
+                                                        <td>
+                                                        </td>
+                                                        <td>
+                                                        </td>
+                                                    </tr>
+
+                                                </div>
+                                            </t>
+                                            <t t-set='total_setup_time_hours_piece'
+                                                value='total_setup_time/60' />
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td></td>
+                                                <td colspan="1">
+                                                    <strong>Time per Piece (HR):</strong>
+                                                </td>
+                                                <td>
+
+                                                    <t t-esc="total_setup_time_hours_piece" />
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td colspan="1">
+                                                    <strong>Total Time for Job (HR):</strong>
+                                                </td>
+                                                <td>
+
+                                                    <t t-set='total_setup_time_hours_job'
+                                                        value='total_setup_time/60' />
+                                                    <t t-esc="total_setup_time_hours_job" />
+                                                </td>
+
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                    <h1
+                                        style="text-align: center; font-size: 24px; margin: 20px 20px;">
+                                        Material
+                                        List</h1>
+                                    <t t-if="len(docs) == 1">
+                                        <t t-set="doc" t-value="docs[0]" />
+                                        <div>
+                                            <div
+                                                style="width:100%;border-bottom: 0px solid black; text-align: right;font-weight:bold; padding-right:20px; ">
+                                                <t t-set="counter" t-value="1" />
+                                                <t t-foreach="mfprod" t-as="line"> Quantity: <span
+                                                        t-field="line.quantity" />
+                                                </t>
+                                            </div>
+                                        </div>
+                                    </t>
+                                    <br />
+                                    <table
+                                        class=""
+                                        style="width:100%;  border-collapse: collapse;">
+
+                                        <thead>
+                                            <tr style='border-bottom:0px solid black'>
+                                                <th
+                                                    style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold ; text-align:left">
+                                                    Needed</th>
+                                                <th
+                                                    style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold ; text-align:left">
+                                                    On Hand
+                                                </th>
+                                                <th
+                                                    style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold ; text-align:left">
+                                                    Posted
+                                                </th>
+                                                <th
+                                                    style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold; text-align:left">
+                                                    Short
+                                                </th>
+
+                                                <th
+                                                    style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold; text-align:left">
+                                                    Unit</th>
+                                                <th
+                                                    style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold; text-align:left">
+                                                    Part Number</th>
+                                                <th
+                                                    style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold; text-align:left">
+                                                    Sub-Assy</th>
+                                                <th
+                                                    style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold; text-align:left">
+                                                    Vendor</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-set="counter" t-value="1" />
+                                            <t t-set="total_setup_time"
+                                                t-value="0" />
+                                            <t
+                                                t-foreach="mfprod.product_id.product_tmpl_id.estimate_ids.estimate_material_line_ids"
+                                                t-as="materials">
+                                                <div>
+
+                                                    <t t-set="total_time"
+                                                        t-value="workcenter.setup_time + workcenter.cycle_time" />
+                                                    <t t-set="total_setup_time"
+                                                        t-value="total_setup_time + workcenter.setup_time" />
+                                                    <tr style=''>
+                                                        <td>
+                                                            <span t-field='materials.quantity' />
+                                                        </td>
+                                                        <td>
+                                                            0
+
+                                                        </td>
+                                                        <td
+                                                            style="border-bottom: 0px solid black; text-align: left; ">
+                                                            <span t-field='materials.quantity' />
+                                                        </td>
+                                                        <td
+                                                            style="border-bottom: 0px solid black; text-align: left; ">
+                                                            0
+                                                        </td>
+                                                        <td
+                                                            style="border-bottom: 0px solid black; text-align: left;">
+                                                            <span t-field='materials.unit' />
+                                                        </td>
+                                                        <td
+                                                            style="border-bottom: 0px solid black; text-align: left;">
+                                                            <span t-field='materials.product_id' />
+                                                        </td>
+                                                        <td
+                                                            style="border-bottom: 0px solid black; text-align: left; ">
+                                                            NO
+                                                        </td>
+                                                        <td
+                                                            style="border-bottom: 0px solid black; text-align: left; ">
+                                                            <span t-field='materials.vendor_id' />
+                                                        </td>
+                                                    </tr>
+                                                </div>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                    <br />
+                                    <!-- Footer -->
+                                    <div class="footer"
+                                        style="position: fixed;
+                                    padding: 5px;
+                                    bottom: 0;
+                                    width: 100%;
+                                    height: 50px;
+                                    background: rgb(55, 61, 55);
+                                    color: white;
+                ">
+                                        <p style="margin: 0;">Thank you for choosing Special Carbide
+                                            Tools
+                                            Inc.</p>
+                                        <p style="margin: 0;">www.specialcarbide.com | Phone:
+                                            520-624-0007|
+                                            Fax:
+                                            520-624-1952</p>
+                                    </div>
+                                </div>
+                            </t>
+                        </t>
+                    </t>
+                </div>
+
+            </t>
+        </template>
+
+
+        <record
+            id="action_report_custom_saleorder4" model="ir.actions.report">
+            <field name="name">Job Traveler Report</field>
+            <field name="model">mrp.production</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">customer_multiple_mo.report_custom_saleorder4</field>
+            <field name="report_file">customer_multiple_mo.report_custom_saleorder4</field>
+            <field name="binding_model_id" ref="mrp.model_mrp_production" />
+            <field name="binding_type">report</field>
+        </record>
+
+
+        <!--  <menuitem id="menu_custom_saleorder_report"
+            name="Custom Sales Order Report"
+            parent="sale.menu_sale_order"
+            action="action_report_custom_saleorder" />-->
+
+    </data>
+</odoo>

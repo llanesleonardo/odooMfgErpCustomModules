@@ -1,0 +1,11 @@
+.o-mail-ChatterContainer,
+.o-mail-Form-chatter {
+    --Chatter-asideExtraWidth: 0px;
+}
+
+.o_FormRenderer_chatterContainer {}
+
+.o-mail-ChatterContainer.o-aside,
+.o-mail-Form-chatter.o-aside {
+    width: calc(230px + var(--Chatter-asideExtraWidth));
+}

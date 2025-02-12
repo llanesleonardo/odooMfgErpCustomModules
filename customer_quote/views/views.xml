@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+<record id="action_customer_quote" model="ir.actions.act_window">
+    <field name="name">Customer Quote</field>
+    <field name="res_model">customer.quote</field> <!-- Replace with your model name -->
+    <field name="view_mode">list,form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+</record>
+
+
+ <record id="action_create_mo" model="ir.actions.act_window">
+            <field name="name">Create MOs</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mrp.production</field> <!-- Replace with your model name -->
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+
+
+<record id="view_create_mo_wizard_form" model="ir.ui.view">
+    <field name="name">create.mo.wizard.form</field>
+    <field name="model">create.mo.wizard</field>
+        <field name="arch" type="xml">
+                <form string="Create Manufacturing Orders">
+            <sheet>
+                <group>
+                    <group>
+                        <field name="quote_id" readonly="True"/>
+                        <field name="quote_customer_id" readonly="True"/>
+                    </group> 
+                    <group>                    
+                        <field name="quote_sales_team_user_id" readonly="True"/>
+                        <!-- <field name="quote_linked_to_mo"/>    -->                
+</group>
+                </group>
+                    <field name="line_ids">
+                        <list  editable="bottom" create="false">
+                            <field name="product_id"/>
+                            <field name="pricing_qty"/>
+                            <field name="estimate_data_qty" />
+                            <field name="estimate_data_pricing" />
+                        </list>
+                    </field>
+            </sheet>
+                    <footer>
+                        <button name="action_create_mos" string="Create MOs" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+</record>
+
+
+   <!-- Top-level menu item for Customer Quote -->
+    <menuitem id="menu_customer_quote_root"
+              name="Quotes"
+              web_icon="custom_quote,static/description/icon.png"
+              sequence="2"/>
+<menuitem id="menu_separator"
+          name="Separator"
+          web_icon="fa-separator"
+          sequence="3"/>
+    <!-- Submenu item for Customer Quote list -->
+    <menuitem id="menu_customer_quote_list"
+              name="Quotes"
+              action="action_customer_quote"
+              parent="menu_customer_quote_root"
+              sequence="1"/>
+
+   <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="customer_quote_list_view">
+      <field name="name">Quote list</field>
+      <field name="model">customer.quote</field>
+      <field name="arch" type="xml">
+        <list>
+          <field name="name"/>
+          <field name="customer_id" />
+          <field name="quote_date"/>
+          <field name="expiration_date"/>
+          <field name="sales_team_user_id" />
+        </list>
+      </field>
+    </record>
+
+
+ <!-- Form View -->
+    <record model="ir.ui.view" id="customer_quote_form_view">
+        <field name="name">Customer Quote Form</field>
+        <field name="model">customer.quote</field>
+        <field name="arch" type="xml">
+            <form>
+            <header>
+                <!-- Button to change status to Review (visible in Draft state) -->
+                <button
+                    name="action_review"
+                    type="object"
+                    string="Send Quote for Review"
+                    class="btn-primary"
+                    invisible="quote_status != 'draft'"
+                />
+                  <!-- Button that triggers the client action -->
+                  <button 
+                        name="action_create_mos" 
+                        string="Create MO" 
+                        data-hotkey="z"
+                        type="object"
+                        />
+                <!-- Button to change status to Confirmed (visible in Review state) -->
+                <button
+                    name="action_confirm"
+                    type="object"
+                    string="Confirm Quote"
+                    class="btn-primary"
+                    invisible="quote_status != 'review'"
+                />
+                <button
+                    name="action_create_mo_dialog"
+                    type="object"
+                    string="Create Order"
+                    class="btn-primary"
+                    invisible="quote_status in ['review','draft']"
+                />
+            </header>
+                <sheet>
+                    <!-- Header Section -->
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" class="oe_inline"/>
+                        </h1>
+                    </div>
+
+                    <group>
+                        <group>
+                            <field name="customer_id" readonly="lock_fields==True"/>
+                            <field name="quote_date" readonly="lock_fields==True"/>
+                            <field name="expiration_date" readonly="lock_fields==True"/>
+                            <field name="quote_status" readonly="True" />
+                            <field name="payment_terms" readonly="lock_fields==True"/>                        
+                        </group>
+                        <group>
+                            <field name="lock_fields"/>
+                            <field name="sales_team_user_id" readonly="lock_fields==True"/>
+                            <field name="sales_team" readonly="lock_fields==True"/>
+                            <field name="sign_by" readonly="lock_fields==True" />
+                        </group>
+                    </group>
+
+                    <!-- Notebook for Quote Lines -->
+                    <notebook>
+                        <page string="Quote Lines" >
+                            <field name="quote_lines" readonly="lock_fields==True">
+                                <list editable="bottom">
+                                    <field name="product_id" readonly="lock_fields==True"/>
+                                    <field name="product_type" readonly="lock_fields==True"/>
+                                    <field name="subtype" readonly="lock_fields==True"/>
+                                    <field name="estimate_data_qty" readonly="lock_fields==True"/>
+                                    <field name="estimate_data_pricing" readonly="lock_fields==True"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="..action_server">
+      <field name="name">. server</field>
+      <field name="model_id" ref="model_._."/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "list,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="." id="..menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="..menu_1" parent="..menu_root"/>
+    <menuitem name="Menu 2" id="..menu_2" parent="..menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="..menu_1_list" parent="..menu_1"
+              action="..action_window"/>
+    <menuitem name="Server to list" id="." parent="..menu_2"
+              action="..action_server"/>
+-->
+  </data>
+</odoo>

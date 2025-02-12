@@ -1,0 +1,20 @@
+<odoo>
+    <data>
+        <report
+            id="report_custom_saleorder"
+            model="sale.order"
+            string="Custom Sale Order"
+            report_type="qweb-pdf"
+            name="custom_product_estimate_sales.report_custom_saleorder"
+            file="custom_product_estimate_sales.report_custom_saleorder" />
+        <report
+            id="report_custom_saleorder_acknowledgement"
+            model="sale.order"
+            string="Sale Order Acknowledgement"
+            report_type="qweb-pdf"
+            name="custom_product_estimate_sales.report_custom_saleorder_acknowledgement"
+            file="custom_product_estimate_sales.report_custom_saleorder_acknowledgement"
+            print_report_name="'Acknowledgement - %s' % (object.name)"
+        />
+    </data>
+</odoo>

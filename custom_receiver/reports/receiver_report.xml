@@ -1,0 +1,246 @@
+<odoo>
+    <data>
+
+        <template id="report_custom_receiver2">
+            <t t-call="web.html_container">
+                <div style="margin-top: 0px;">
+                    <t t-set="data_report_margin_top" t-value="10" />
+                    <t t-foreach="docs" t-as="o">
+                        <div class="page">
+                            <!-- Report Title -->
+                            <table
+                                style=''>
+                                <tr>
+                                    <!-- Report Title -->
+                                    <td
+                                        style='width:350px; margin:0 auto; text-align:center; padding: 10px 10px 10px 10px;'>
+                                        <img
+                                            src="https://sctwebsitestorage.blob.core.windows.net/sctwebsite/images/favico.png"
+                                            alt='Logo'
+                                            style='margin:0 auto; padding-bottom:10px; max-width:200px; text-align:center' />
+                                    </td>
+                                    <td
+                                        style='width:250px; max-width:500px; margin:0 auto; text-align:center; padding: 0px 10px 0px 10px;'>
+                                        <h3
+                                            style="text-align: center; font-size: 18px; margin-bottom: 5px;">
+                                            Special carbide Tools Inc.
+                                        </h3>
+                                        <p style='margin:0'>Special carbide Tools Inc.</p>
+                                        <p style='margin:0'>3153 E. 36th St. Tucson, AZ 85713 USA.</p>
+                                        <p style='margin:0'>Phone: 520-624-0007</p>
+                                        <p style='margin:0'>Fax: 520-624-1952</p>
+                                    </td>
+                                    <td
+                                        style='width:250px; max-width:500px; margin:0 auto; text-align:center; padding: 0px 10px 0px 10px;'>
+
+                                    </td>
+                                </tr>
+                            </table>
+                            <t t-if="len(docs) == 1">
+                                <t t-set="doc" t-value="docs[0]" />
+                                <div class="page">
+                                    <table style='width:100%'>
+                                        <tr>
+                                            <!-- Report Title -->
+                                            <td
+                                                style='display:flex; justify-content:center; align-items:flex-start; margin:0 auto; text-align:center; padding: 10px 10px 10px 10px;'>
+                                                <b>From:</b> <br/> <br/>
+                                                <span t-esc="doc.partner_id.name" /> <br/>
+                                                <span t-esc="doc.partner_id.street" /> <br/>
+                                                    <span t-esc="doc.partner_id.city" />
+                                                    <span t-esc="doc.partner_id.state_id.code" />
+                                                    <span t-esc="doc.partner_id.zip" /><br/>
+                                                    <span t-esc="doc.partner_id.country_id.display_name" />
+                                            </td>
+                                            <td
+                                                style='margin:0 auto; text-align:center; padding: 0px 10px 0px 10px;'>
+                                               <b> Ship To:</b> <span t-esc="doc.company_id.company_details" /> 
+   
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </t>
+                            <h1
+                                style="text-align: center; font-size: 24px; margin-bottom: 10px;">
+                                Receiver
+                            </h1>
+                                <t t-if="len(docs) == 1">
+                                    <t t-set="doc" t-value="docs[0]" />
+                                    <div class="page">
+                                        <table style='width:100%; background-color:lightgray;'>
+                                            <tr>
+                                                <td style="display:flex; justify-content:flex-start; align-items:flex-start; text-align:left; padding: 10px 10px 10px 10px;">
+                                                    <p><b>Receiver No:</b> <span t-field="doc.name" /></p>
+
+                                                    <p><b>Date Received:</b> <span t-field="doc.date_done" /></p>
+
+                                                    <p><b>Ship Via:</b> <span t-field="doc.partner_id.name" /></p>
+
+                                                    <p><b>Order Date:</b> <span
+                                                            t-esc="doc.origin" /></p>
+                                                </td>
+                                                <td style="display:flex; justify-content:flex-start; align-items:flex-start; text-align:left; padding: 10px 10px 10px 10px;">
+                                                    <p><b>Vendor Code:</b> <span t-field="doc.partner_id.name" /></p>
+                                                    <p><b>Phone:</b> <span t-field="doc.partner_id.phone" /></p>                                             
+                                                    <p><b>PO Number:</b> <span t-field="doc.origin" /></p>                                             
+                                                    <p><b>Terms:</b> <span /></p>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+
+                                    </div>
+                                </t>
+                            <h2 style='text-align:center;font-weight:bold;'> </h2>
+                            <table
+                                class="table "
+                                style="width:100%;border-top:1px solid lightgray; ">
+                                <thead>
+                                    <tr style='border-bottom:0px solid black'>
+                                        <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold ; text-align:left">
+                                            Item</th>
+                                        <!-- <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold ;
+                                        text-align:left">
+                                            Release Type
+                                        </th>-->
+                                        <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold ; text-align:left">
+                                            Open
+                                        </th>
+                                        <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold; text-align:left">
+                                            Received
+                                        </th>
+
+                                        <!--  <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold;
+                                        text-align:left">
+                                            Ship Date</th>-->
+                                        <!-- <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold;
+                                        text-align:left">
+                                            Packing List</th>-->
+                                        <!-- <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold;
+                                        text-align:left">
+                                            MFG Job No</th>-->
+                                        <!-- <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold;
+                                        text-align:left">
+                                            Destination Job No</th>-->
+                                        <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold; text-align:left">
+                                            Back Ord</th>
+                                        <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold; text-align:left">
+                                            Canceled</th>
+                                        <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold; text-align:left">
+                                            Rejected </th>
+                                        <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold; text-align:left">
+                                            Unit </th>
+                                        <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold; text-align:left">
+                                            Description </th>
+                                        <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold; text-align:left">
+                                            Job numbers </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="counter" t-value="1" />
+                                    <t t-foreach="o.move_ids_without_package" t-as="line">
+                                        <div>
+                                            <tr style=''>
+                                                <td
+                                                    style="border-bottom: 0px solid black; text-align: left; ">
+                                                     <t t-esc="counter" />
+                                                    <t t-set="counter" t-value="counter + 1" />
+                                                     </td>
+                                                <!--  <td
+                                                    style="border-bottom: 0px solid black; text-align: left; ">
+
+                                                    <span />
+                                                </td> -->
+                                                <td
+                                                    style="border-bottom: 0px solid black; text-align: left; ">
+
+                                                    <span
+                                                        t-field="line.product_id" /><br /> Release
+                                                    Detail Information: <br />
+
+                                                        <br />
+                                                        <span
+                                                        t-field="line.product_qty" /> by </td>
+                                                <td
+                                                    style="border-bottom: 0px solid black; text-align: left; ">
+
+                                                    <span />
+                                                </td>
+                                                <td>
+                                                </td>
+                                                <td>
+                                                    <span t-field="line.price_unit" />
+                                                </td>
+                                                <td> EA <!-- <span t-field="line.product_uom" />-->
+                                                </td>
+                                                <td>
+                                                    $
+                                                </td>
+
+                                            </tr>
+                                            <!-- Add <hr /> outside of the <tr> but inside the
+                                            <tbody> -->
+
+
+                                        </div>
+                                    </t>
+                                </tbody>
+                            </table>
+                            <br />
+                            <!-- Footer -->
+                            <div class="footer"
+                                style="position: fixed;
+                                    padding: 5px;
+                                    bottom: 0;
+                                    width: 100%;
+                                    height: 50px;
+                                    background: rgb(55, 61, 55);
+                                    color: white;
+                ">
+                                <p style="margin: 0;">Thank you for choosing Special Carbide Tools
+                                    Inc.</p>
+                                <p style="margin: 0;">www.specialcarbide.com | Phone: 520-624-0007|
+                                    Fax:
+                                    520-624-1952</p>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+
+            </t>
+        </template>
+
+
+        <record
+            id="action_report_custom_receiver2" model="ir.actions.report">
+            <field name="name">Receiver report</field>
+            <field name="model">stock.picking</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">custom_receiver.report_custom_receiver2</field>
+            <field name="report_file">custom_receiver.report_custom_receiver2</field>
+            <field name="binding_model_id" ref="stock.model_stock_picking" />
+
+            <field name="binding_type">report</field>
+        </record>
+
+        <!--  <menuitem id="menu_custom_saleorder_report"
+            name="Custom Sales Order Report"
+            parent="sale.menu_sale_order"
+            action="action_report_custom_saleorder" />-->
+    </data>
+</odoo>

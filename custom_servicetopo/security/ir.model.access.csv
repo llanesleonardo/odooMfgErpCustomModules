@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_custom_servtopo_custom_servtopo,custom_servtopo.custom_servtopo,model_custom_servtopo_custom_servtopo,base.group_user,1,1,1,1

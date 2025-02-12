@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="custom_sale_order_portal_template" inherit_id="sale.sale_order_portal_content">
+        <xpath expr="//div[@id='content']//section[@id='details']" position="before">
+            <div class="sale_order_logging mt-4">
+                <h3 class="mb-3">Order Line Details</h3>
+
+                <!-- Loop through order lines -->
+                <t t-set="order_lines" t-value="sale_order.order_line" />
+                <t t-if="order_lines">
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Estimated Quantity</th>
+                                    <th>Estimated Pricing</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="order_lines" t-as="line">
+                                    <tr>
+                                        <!-- Display product name -->
+                                        <td>
+                                            <t t-esc="line.product_id.name" />
+                                        </td>
+                                        <!-- Display estimated quantity -->
+                                        <td style="text-align:right;">
+                                            <t t-esc="line.formatted_estimate_data_qty" />
+                                        </td>
+                                        <!-- Display estimated pricing -->
+                                        <td style="text-align:right;">
+                                            <t t-esc="line.formatted_estimate_data_pricing" />
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+                <t t-else="">
+                    <p>No order lines available.</p>
+                </t>
+            </div>
+        </xpath>
+    </template>
+</odoo>

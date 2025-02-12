@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-name="QtyAtDateWidget">
+        <span class="o_qty_at_date_widget"></span>
+    </t>
+</templates>

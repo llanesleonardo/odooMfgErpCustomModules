@@ -1,0 +1,203 @@
+<odoo>
+    <data>
+        <template id="report_customer_quote">
+            <t t-call="web.html_container">
+                <div style="margin-top: 0px;">
+                    <t t-set="data_report_margin_top" t-value="10" />
+                    <t t-foreach="docs" t-as="o">
+                        <div class="page">
+                            <!-- Report Title -->
+                            <div
+                                style='max-width:350px; margin:0 auto; text-align:center; padding: 10px 100px 10px 100px;'>
+                                <img
+                                    src="https://sctwebsitestorage.blob.core.windows.net/sctwebsite/images/logohoriz-1.png"
+                                    alt='Logo'
+                                    style='margin:0 auto; padding-bottom:10px; max-width:300px; text-align:center' />
+                            </div>
+                            <div
+                                style='max-width:250px; margin:0 auto; text-align:center; padding: 0px 100px 0px 100px;'>
+                                <h3 style="text-align: center; font-size: 18px; margin-bottom: 5px;">
+                                    Special carbide Tools Inc.
+                                </h3>
+                                <p style='margin:0'>Special carbide Tools Inc.</p>
+                                <p style='margin:0'>3153 E. 36th St. Tucson, AZ 85713 USA.</p>
+                                <p style='margin:0'>Phone: 520-624-0007</p>
+                                <p style='margin:0'>Fax: 520-624-1952</p>
+                            </div>
+                            <h1
+                                style="text-align: center; font-size: 24px; margin-bottom: 10px;">
+                                Quotation
+                            </h1>
+                            <div
+                                style='margin-bottom:20px'>
+                                <p>Quote to: <t t-esc="o.customer_id.name" /></p>
+                                <p>Address: <t t-esc="o.customer_id.street" /> <t
+                                        t-esc="o.customer_id.zip" /> <t
+                                        t-esc="o.customer_id.city" /> <t
+                                        t-esc="o.customer_id.country_id.name" /></p>
+                            </div>
+                            <div>
+                                <t t-if="len(docs) == 1">
+                                    <t t-set="doc" t-value="docs[0]" />
+                                    <div class="page">
+                                        <table class="table table-bordered"
+                                            style="width:100%; border:1px solid black;">
+                                            <tr>
+                                                <td style="width: 300px;">
+                                                    <p style="font-weight:bold;">Quote number: <span
+                                                            t-field="doc.name" /></p>
+                                                    <p style="font-weight:bold;">Quote date:<span
+                                                            t-field="doc.create_date" /></p>
+                                                    <p style="font-weight:bold;">Customer: <t
+                                                            t-esc="o.customer_id.name" /></p>
+                                                    <p style="font-weight:bold;">Salesman: <span
+                                                            t-field="doc.sales_team_user_id" /></p>
+                                                    <p style="font-weight:bold;">Ship via: </p>
+                                                    <p style="font-weight:bold;">FOB: </p>
+                                                </td>
+                                                <td style="width: 300px;">
+                                                    <p style="font-weight:bold;">Expiration date: <span
+                                                            t-field="doc.expiration_date" /></p>
+                                                    <p style="font-weight:bold;">Inquiry:</p>
+                                                    <p style="font-weight:bold;">Terms: </p>
+                                                    <p style="font-weight:bold;">Phone: <t
+                                                            t-esc="o.customer_id.phone" /></p>
+                                                    <p style="font-weight:bold;">Email:<t
+                                                            t-esc="o.customer_id.email" />
+                                                    </p>
+                                                    <p style="font-weight:bold;">Delivery: <span
+                                                            t-field='doc.commitment_date' />
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <div>
+                                            <p>
+                                                <span
+                                                    t-field="doc.note" />
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </t>
+                            </div>
+                            <table
+                                class="table table-bordered"
+                                style="width:100%;  border-collapse: collapse;">
+                                <thead>
+                                    <tr style='border-bottom:0px solid black'>
+                                        <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold ; text-align:left">
+                                            Item</th>
+                                        <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold ; text-align:left">Part
+                                            number
+                                        </th>
+                                        <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold ; text-align:left">
+                                            Description
+                                        </th>
+                                        <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold; text-align:left">
+                                            Quantity
+                                        </th>
+
+                                        <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold; text-align:left">
+                                            Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="counter" t-value="1" />
+                                    <t t-foreach="o.quote_lines" t-as="line">
+                                        <div>
+                                            <tr style=''>
+                                                <td
+                                                    style="border-bottom: 0px solid black; text-align: left;width: 200px; ">
+                                                    <t t-esc="counter" />
+                                                    <t t-set="counter" t-value="counter + 1" />
+                                                </td>
+                                                <td
+                                                    style="border-bottom: 0px solid black; text-align: left;width: 200px;   ">
+                                                    <t t-esc="line.product_id.display_name" />
+                                                </td>
+                                                <td
+                                                    style="border-bottom: 0px solid black; text-align: left;width: 200px;   ">
+                                                    <t
+                                                        t-esc="line.product_id.estimate_ids.part_description" />
+                                                    <t
+                                                        t-esc="line.product_id.estimate_ids.part_notes" />
+                                                </td>
+                                                <td
+                                                    style="border-bottom: 0px solid black; padding: 0 20px 0 20px; margin: 0; width: 200px;">
+                                                    <div
+                                                        style="margin: 0; padding: 0; line-height: 1; text-align: left;white-space: pre-wrap;">
+                                                        <t t-esc="line.formatted_estimate_data_qty" />
+                                                    </div>
+                                                </td>
+                                                <td
+                                                    style="border-bottom: 0px solid black; padding: 0 20px 0 20px; margin: 0; width: 200px;">
+                                                    <div
+                                                        style="margin: 0; padding: 0; line-height: 1; text-align: left;white-space: pre-wrap;">
+                                                        <t
+                                                            t-esc="line.formatted_estimate_data_pricing" />
+                                                    </div>
+                                                </td>
+
+                                            </tr>
+                                            <!-- Add <hr /> outside of the <tr> but inside the
+                                            <tbody> -->
+                                            <tr>
+                                                <td colspan="5" style="border: none;">
+                                                    <hr
+                                                        style="height:2px ;margin: 0; border-style: double;" />
+                                                </td>
+                                            </tr>
+
+                                        </div>
+                                    </t>
+                                </tbody>
+                            </table>
+                            <!-- Footer -->
+                            <div class="footer"
+                                style="position: fixed;
+                                    padding: 5px;
+                                    bottom: 0;
+                                    width: 100%;
+                                    height: 50px;
+                                    background: rgb(55, 61, 55);
+                                    color: white;
+                ">
+                                <p style="margin: 0;">Thank you for choosing Special Carbide Tools
+                                    Inc.</p>
+                                <p style="margin: 0;">www.specialcarbide.com | Phone: 520-624-0007|
+                                    Fax:
+                                    520-624-1952</p>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+
+            </t>
+        </template>
+
+
+        <record
+            id="action_report_customer_quote" model="ir.actions.report">
+            <field name="name">Quantity Pricing Tiers Report</field>
+            <field name="model">customer.quote</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">customer_quote.report_customer_quote</field>
+            <field name="report_file">customer_quote.report_customer_quote</field>
+            <field name="binding_model_id" ref="model_customer_quote" />
+            <field name="binding_type">report</field>
+        </record>
+
+
+        <!--  <menuitem id="menu_custom_saleorder_report"
+            name="Custom Sales Order Report"
+            parent="sale.menu_sale_order"
+            action="action_report_custom_saleorder" />-->
+
+    </data>
+</odoo>

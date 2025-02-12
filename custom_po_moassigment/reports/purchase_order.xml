@@ -1,0 +1,258 @@
+<odoo>
+    <data>
+        <template id="report_custom_po2">
+            <t t-call="web.html_container">
+                <div style="margin-top: 0px;">
+                    <t t-set="data_report_margin_top" t-value="10" />
+                    <t t-foreach="docs" t-as="o">
+                        <div class="page">
+                            <!-- Report Title -->
+                            <table
+                                style=''>
+                                <tr>
+                                    <!-- Report Title -->
+                                    <td
+                                        style='width:350px; margin:0 auto; text-align:center; padding: 10px 10px 10px 10px;'>
+                                        <img
+                                            src="https://sctwebsitestorage.blob.core.windows.net/sctwebsite/images/favico.png"
+                                            alt='Logo'
+                                            style='margin:0 auto; padding-bottom:10px; max-width:200px; text-align:center' />
+                                    </td>
+                                    <td
+                                        style='width:250px; max-width:500px; margin:0 auto; text-align:center; padding: 0px 10px 0px 10px;'>
+                                        <h3
+                                            style="text-align: center; font-size: 18px; margin-bottom: 5px;">
+                                            Special carbide Tools Inc.
+                                        </h3>
+                                        <p style='margin:0'>Special carbide Tools Inc.</p>
+                                        <p style='margin:0'>3153 E. 36th St. Tucson, AZ 85713 USA.</p>
+                                        <p style='margin:0'>Phone: 520-624-0007</p>
+                                        <p style='margin:0'>Fax: 520-624-1952</p>
+                                    </td>
+                                    <td
+                                        style='width:250px; max-width:500px; margin:0 auto; text-align:center; padding: 0px 10px 0px 10px;'>
+                                        
+                                    </td>
+                                </tr>
+                            </table>
+                            <h1
+                                style="text-align: center; font-size: 24px; margin-bottom: 10px;">
+                                Purchase Order
+                            </h1>
+                            <div>
+                                <t t-if="len(docs) == 1">
+                                    <t t-set="doc" t-value="docs[0]" />
+                                    <div class="page">
+                                        <t t-foreach="o.order_line" t-as="orderline">
+                                            <table class="table table-bordered"
+                                                style="width:100%; border:1px solid black; background-color:lightgray">
+
+                                                <tr>
+                                                    <td style="width: 300px;">
+                                                        <p style="font-weight:bold;">Order number: <span
+                                                                t-field="doc.display_name" /></p>
+                                                        <p style="font-weight:bold;">Order Date:
+                                                            <span
+                                                                t-field="doc.date_order" />
+                                                            </p>
+                                                        <p style="font-weight:bold;">Vendor Code: <t
+                                                                t-esc="o.partner_id.name" /></p>
+                                                        <p style="font-weight:bold;">Vendor Phone: <span
+                                                                t-field="o.partner_id.phone" /></p>
+                                                        <p style="font-weight:bold;">Vendor Fax:
+                                                            <span
+                                                                 />
+                                                         </p>
+                                                        <p style="font-weight:bold;">FOB:
+                                                            <span
+                                                                 />
+                                                         </p>
+                                                    </td>
+                                                    <td style="width: 300px;">
+                                                        <p style="font-weight:bold;">Ship Via:</p>
+                                                        <p style="font-weight:bold;">Terms:<span
+                                                                t-field="doc.create_date" /></p>
+                                                        <p style="font-weight:bold;">Contact:
+                                                            <span
+                                                                t-field="o.partner_id.user_id" />
+                                                         </p>
+                                                        <p style="font-weight:bold;">Purchasing agent: 
+                                                        <span
+                                                                t-field="o.partner_id.user_id" />
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </t>
+                                        <div>
+                                            <p>
+<!--                                                <span
+                                                    t-field="doc.note" />
+-->
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </t>
+                            </div>
+                            <h2 style='text-align:center;font-weight:bold;'> </h2>
+                            <table
+                                class="table "
+                                style="width:100%;border-top:1px solid lightgray; ">
+                                <thead>
+                                    <tr style='border-bottom:0px solid black'>
+                                        <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold ; text-align:left">
+                                            Order Quantity</th>
+                                        <!-- <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold ;
+                                        text-align:left">
+                                            Release Type
+                                        </th>-->
+                                        <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold ; text-align:left">
+                                            Part Number Description
+                                        </th>
+                                        <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold; text-align:left">
+                                            Revision
+                                        </th>
+
+                                        <!--  <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold;
+                                        text-align:left">
+                                            Ship Date</th>-->
+                                        <!-- <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold;
+                                        text-align:left">
+                                            Packing List</th>-->
+                                        <!-- <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold;
+                                        text-align:left">
+                                            MFG Job No</th>-->
+                                        <!-- <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold;
+                                        text-align:left">
+                                            Destination Job No</th>-->
+                                        <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold; text-align:left">
+                                            Date Required</th>
+            <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold; text-align:left">
+                                            Unit Cost</th>
+            <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold; text-align:left">
+                                            Unit </th>
+            <th
+                                            style="border-bottom: 0px solid black; text-decoration:underline; font-weight:bold; text-align:left">
+                                            Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="counter" t-value="1" />
+                                    <t t-foreach="o.order_line" t-as="line">
+                                        <div>
+                                            <tr style=''>
+                                                <td
+                                                    style="border-bottom: 0px solid black; text-align: left; ">
+                                                    <span
+                                                        t-field="line.product_qty" />
+                                                </td>
+                                                <!--  <td
+                                                    style="border-bottom: 0px solid black; text-align: left; ">
+
+                                                    <span />
+                                                </td> -->
+                                                <td
+                                                    style="border-bottom: 0px solid black; text-align: left; ">
+
+                                                    <span
+                                                        t-field="line.product_id" /><br/>
+                                                        Release Detail Information: <br/>
+
+                            <!--                    MANUFACTURING                          -->
+                                                        JOB NUMBER:
+                                                              <t t-foreach="o.product_to_split_ids.filtered(lambda x: x.product_id_to_split == line.product_id)" t-as="split_line">
+                                                   
+                                                                <span t-field="split_line.manufacturing_order_id"/> (<span t-field="split_line.product_id_to_split_quantity"/>)
+                                                                    <br/>
+                                                                 </t>
+                                                            
+                                        <!--                 MANUFACTURING                               -->
+                                                        <br/>
+                                                        <span
+                                                        t-field="line.product_qty" /> by <span t-field="o.effective_date" /> 
+                                                
+                                                </td>
+                                                <td
+                                                    style="border-bottom: 0px solid black; text-align: left; ">
+
+                                                    <span
+                                                         />
+                                                </td>
+                                                <td>
+                                                   <span t-field="o.effective_date" />
+                                                </td>
+                                                    <td>
+                                                    <span t-field="line.price_unit" />
+                                                    </td>
+                                                    <td>
+                                                    EA <!-- <span t-field="line.product_uom" />-->
+                                                   </td>
+                                                    <td>
+                                                    $ <span t-esc="line.price_subtotal" />
+                                                    </td>
+
+                                            </tr>
+                                            <!-- Add <hr /> outside of the <tr> but inside the
+                                            <tbody> -->
+
+
+                                        </div>
+                                    </t>
+                                </tbody>
+                            </table>
+                            <br />
+                            <!-- Footer -->
+                            <div class="footer"
+                                style="position: fixed;
+                                    padding: 5px;
+                                    bottom: 0;
+                                    width: 100%;
+                                    height: 50px;
+                                    background: rgb(55, 61, 55);
+                                    color: white;
+                ">
+                                <p style="margin: 0;">Thank you for choosing Special Carbide Tools
+                                    Inc.</p>
+                                <p style="margin: 0;">www.specialcarbide.com | Phone: 520-624-0007|
+                                    Fax:
+                                    520-624-1952</p>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+
+            </t>
+        </template>
+
+
+        <record
+            id="action_report_custom_po2" model="ir.actions.report">
+            <field name="name">PO report</field>
+            <field name="model">purchase.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">custom_po_moassigment.report_custom_po2</field>
+            <field name="report_file">custom_po_moassigment.report_custom_po2</field>
+            <field name="binding_model_id" ref="purchase.model_purchase_order" />
+            <field name="binding_type">report</field>
+        </record>
+
+
+        <!--  <menuitem id="menu_custom_saleorder_report"
+            name="Custom Sales Order Report"
+            parent="sale.menu_sale_order"
+            action="action_report_custom_saleorder" />-->
+
+    </data>
+</odoo>

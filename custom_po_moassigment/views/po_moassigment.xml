@@ -1,0 +1,72 @@
+<odoo>
+<record id="purchase_order_form_inherit" model="ir.ui.view">
+    <field name="name">purchase.order.form.inherit</field>
+    <field name="model">purchase.order</field>
+    <field name="inherit_id" ref="purchase.purchase_order_form"/>
+    <field name="arch" type="xml">
+       
+        <xpath expr="//header" position="inside">
+     <button name="toggle_po_products" type="object" 
+        string="Split PO" 
+        invisible="show_po_products"
+        class="oe_highlight"/>
+<button name="toggle_po_products" type="object" 
+        string="UnSplit PO" 
+        invisible ="not show_po_products"
+        class="oe_highlight"/>
+<!-- 
+            <button name="check_and_update_manufacturing_orders" 
+                    string="Split PO" 
+                    type="object" 
+                    class="btn-primary"/>
+-->
+        </xpath>  
+
+            <xpath expr="//notebook" position="after">
+                    <notebook invisible="not show_po_products">
+                    <page string="Manufacturing Orders">
+                        <field name="product_to_split_ids">
+                            <list editable="bottom">
+                                <field name="po_id_to_split" readonly="True"/>
+                                <field name="product_id_to_split"/>
+                                <field name="product_id_to_split_quantity" class="custom_margin3" sum="Total"/>
+                                <field name="manufacturing_order_id"  class="mf_marked" />    
+                                <field name="mo_lines_quantity"  readonly="True"  class="mf_marked" />                                                
+                            </list>
+                        </field>
+                    </page>
+                </notebook>
+            </xpath>
+    </field>
+</record>
+
+
+        <template id="custom_css_inclusion3" inherit_id="web.layout">
+            <xpath expr="." position="inside">
+                <style>
+                    .custom_margin3 {
+                    text-align: center !important;
+                    margin-right: 10px !important;
+                    }
+                    .mf_marked{
+                        background-color: #f2f2f2 !important;
+                    }
+                </style>
+            </xpath>
+        </template>
+
+</odoo>
+
+<!-- 
+
+        <xpath expr="//div[@name='button_box']" position="inside">
+            <button name="action_view_mo" type="object" class="oe_stat_button" icon="fa-cogs">
+                <field name="mo_count" widget="statinfo" string="Manufacturing Orders"/>
+            </button>
+        </xpath>
+        <notebook position="inside">
+            <page string="Manufacturing Orders">
+                <field name="manufacturing_order_ids"/>
+            </page>
+        </notebook>
+-->

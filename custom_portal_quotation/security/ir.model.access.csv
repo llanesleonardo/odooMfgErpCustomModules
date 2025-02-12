@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_custom_portal_quotation_custom_portal_quotation,custom_portal_quotation.custom_portal_quotation,model_custom_portal_quotation_custom_portal_quotation,base.group_user,1,1,1,1

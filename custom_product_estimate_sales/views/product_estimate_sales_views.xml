@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="custom_sale_order_form_view" model="ir.ui.view">
+        <field name="name">sale.order.form.custom</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+   
+            <!-- Add custom fields and modify order line -->
+            <xpath expr="//sheet//notebook//page//field[@name='order_line']/list" position="inside">
+                <!--<field name="estimate_data" readonly="1" style="text-align:right;"/> -->
+ 
+                <field name="product_type" readonly="1" style="text-align:right;" />
+                <field name="subtype" readonly="1" style="text-align:right;" />
+                <field name="estimate_data_qty" readonly="1" style="text-align:right;" />
+                <field name="estimate_data_pricing" readonly="1" style="text-align:right;" />
+
+                <field name="qty_delivered"
+                    column_invisible="parent.state != 'sale'"
+                    decoration-info="(parent.state == 'sale')"
+                    decoration-bf="(parent.state == 'sale')" />
+                <field name="qty_invoiced"
+                    column_invisible="parent.state != 'sale'"
+                    decoration-info="(parent.state == 'sale')"
+                    decoration-bf="(parent.state == 'sale')" />
+                <field name="product_uom_qty"
+                    column_invisible="parent.state != 'sale'"
+                    decoration-info="(parent.state == 'sale')"
+                    decoration-bf="(parent.state == 'sale')" />
+                <field name="price_unit"
+                    column_invisible="parent.state != 'sale'"
+                    decoration-info="(parent.state == 'sale')"
+                    decoration-bf="(parent.state == 'sale')" />
+                <field name="price_subtotal"
+                    column_invisible="parent.state != 'sale'"
+                    decoration-info="(parent.state == 'sale')"
+                    decoration-bf="(parent.state == 'sale')" />
+                <field name="tax_id"
+                    widget="many2many_tags"
+                    options="{'no_create': True}"
+                    domain="[('type_tax_use', '=', 'sale'), ('company_id', 'parent_of', parent.company_id), ('country_id', '=', parent.tax_country_id)]"
+                    context="{'active_test': True}"
+                    readonly="qty_invoiced &gt; 0 or is_downpayment"
+                    optional="show" />
+                <field name='order_due_date'
+                    column_invisible="parent.state != 'sale'"
+                    decoration-info="(parent.state == 'sale')"
+                    decoration-bf="(parent.state == 'sale')" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="custom_sale_order_form_view2" model="ir.ui.view">
+        <field name="name">sale.order.form.custom</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <!-- Add custom field below the Payment Terms field -->
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <!-- Define your custom field below Payment Terms -->
+                <field name="manufacturing_order_id" string="Manufacturing Order" />
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

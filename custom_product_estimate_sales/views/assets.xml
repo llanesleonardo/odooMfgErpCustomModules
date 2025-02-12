@@ -1,0 +1,8 @@
+<odoo>
+    <template id="custom_css_inclusion" inherit_id="web.layout">
+        <xpath expr="//head" position="inside">
+            <link rel="stylesheet" type="text/css"
+                href="/custom_product_estimate_sales/static/src/css/midsize_chatter.css" />
+        </xpath>
+    </template>
+</odoo>

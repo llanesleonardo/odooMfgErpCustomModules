@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_order_form_inherit" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//header/button[@name='action_confirm'][1]" position="after">
+             <button name="create_manufacturing_order"
+        string="Create MO"
+        type="object"
+        class="oe_highlight"
+        invisible="state not in ('sale', 'done')" />               </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,164 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="..list">
+      <field name="name">. list</field>
+      <field name="model">...</field>
+      <field name="arch" type="xml">
+        <list>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </list>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="..action_window">
+      <field name="name">. window</field>
+      <field name="res_model">...</field>
+      <field name="view_mode">list,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="..action_server">
+      <field name="name">. server</field>
+      <field name="model_id" ref="model_._."/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "list,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="." id="..menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="..menu_1" parent="..menu_root"/>
+    <menuitem name="Menu 2" id="..menu_2" parent="..menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="..menu_1_list" parent="..menu_1"
+              action="..action_window"/>
+    <menuitem name="Server to list" id="." parent="..menu_2"
+              action="..action_server"/>
+-->
+
+
+
+<record id="mrp_production_form_view_inherited" model="ir.ui.view">
+    <field name="name">mrp.production.form.inherited</field>
+    <field name="model">mrp.production</field>
+    <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+    <field name="arch" type="xml">
+<xpath expr="//notebook" position="before">
+            <group string="Sales information" >
+            <group>  
+            <field name="linked_quote_id" readonly="True"/>       
+              <field name="customer" />
+            </group>    
+            <group>  
+              <field name="order_total_display" />
+            </group>    
+            </group>           
+
+        </xpath>  
+
+<!-- Change the label of the 'product_id' field using XPath -->
+                <xpath expr="//field[@name='product_id']" position="attributes">
+                    <attribute name="string">Ref</attribute>
+                <!--     <attribute name="readonly">True</attribute>-->
+                </xpath>
+
+<xpath expr="//notebook" position="before">
+            <group class="classnotebook" string="Manufactured Products" >
+                <field name="manufactured_product_ids" string="">
+                    <list editable="bottom"  >
+                        <!-- <field name="mo_id" invisible="True" readonly="True" class="readonlypricing"/>-->
+                        <field name="job_number" />
+                        <field name="product_id"/>
+                        <field name="quantity" />
+                        <field name="selling_price" readonly="False" />
+                        <field name="sub_order_total" readonly="True" class="readonlypricing" />
+                        <field name="pricing_breakdown_qty" readonly="True" class="readonlypricing center_field1"/>    
+                        <field name="pricing_breakdown_prices" readonly="True" class="readonlypricing center_field1"/>
+                        <field name="schedule_date" />
+
+                        <field name="description" readonly="True" class="readonlypricing"/>
+
+                    </list>
+                </field>
+            </group>
+         </xpath>
+    </field>
+</record>
+
+
+        <record id="mrp_production_form_view_extended1" model="ir.ui.view">
+            <field name="name">mrp.production.form.view.extended</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view" /> <!-- Full reference to mrp
+            module -->
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='move_raw_ids']//list//field[@name='product_id']" position="after">
+                    <field name="product_related"/>  
+                    <field name="type_of_m" />                
+                </xpath>
+
+      <!-- New xpath to change tab name -->
+        <xpath expr="//notebook/page[@name='components']" position="attributes">
+            <attribute name="string">Materials</attribute>
+        </xpath>
+
+   <!-- New xpath to change tab name -->
+        <xpath expr="//notebook/page[@name='operations']" position="attributes">
+            <attribute name="string">Work Centers</attribute>
+        </xpath>
+
+
+            </field>
+        </record>
+
+   
+
+ 
+
+
+
+     <template id="custom_css_inclusion4" inherit_id="web.layout">
+            <xpath expr="." position="inside">
+                <style>
+                    .custom_margin_button {
+                    margin: 10px 15px;
+                    padding: 10px 25px !important;
+                    }
+
+                    .center_field1 {
+                    text-align:center !important;
+                    }
+
+                    .readonlypricing {
+                        background-color:lightgray !important;
+                    }
+                    .paddingright1{
+                        padding-right: 10px !important;
+                    }
+                </style>
+            </xpath>
+        </template>
+
+  </data>
+</odoo>

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="customer_estimate_list" model="ir.ui.view">
+        <field name="name">customer.estimate.list</field>
+        <field name="model">customer.estimate</field>
+        <field name="arch" type="xml">
+            <!-- View type and the fields displayed in the view -->
+            <list string="Estimates View" sample="1" multi_edit="0">
+                <field name="name" />
+                <field name="part_description" />
+                <field name="alternate_part_number" />
+                <field name="part_notes" />
+                <field name="lock_price" />
+            </list>
+        </field>
+    </record>
+    <!-- Form and the fields displayed in it -->
+    <record id="customer_estimate_form" model="ir.ui.view">
+        <field name="name">customer.estimate.form</field>
+        <field name="model">customer.estimate</field>
+        <field name="arch" type="xml">
+            <form string="Estimate Form">
+                <header>
+<button name="action_create_customer_quote" type="object" string="Create Customer Quote" class="oe_highlight"/>
+                    <!-- You can create buttons to do something else here -->
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <!-- You can create buttons to do quick actions related to the record -->
+                    </div>
+                    <group name="general" string="General">
+                        <group>
+                            <field name="active" />
+                            <field name="name" />
+                            <field name="product_id_for_estimate_draft" readonly='True' class='readonlypricing' />
+                            <field name="part_description" />
+                            <field name="part_notes" />
+                        </group>
+                        <group>
+                            <field name="pricing_uom" readonly="True" class='readonlypricing'/>
+                            <field name="lock_price"   />
+                            <field name="product_code_id" />
+                            <!--<field name="inventory_code_id" />-->
+                            <field name="property_stock_valuation_account_id"/>
+                            <field name="alternate_part_number" />
+                            <field name="pricing_method" widget="radio" />
+                        </group>
+                    </group>
+                    <group name="pricing" string="Pricing">
+                        <group>
+                            <field name="total_cycle_rate" invisible="True" class='readonlypricing' />
+                            <field name="bar_unit" invisible="True" class='readonlypricing' />
+                            <field name="total_setup_time" class='readonlypricing' />
+                            <field name="total_cycle_time" class='readonlypricing' />
+                            <field name="initial_labor_rate" class='readonlypricing' />
+                            <field name="min_labor_cost" class='readonlypricing' />
+
+                        </group>
+                        <group>
+                            <field name="decrease_rate" readonly="True" class='readonlypricing' />
+                            <field name="setup_unit_cost" class='readonlypricing' />
+                            <field name="total_cycle_rate" class='readonlypricing' />
+                            <field name="burden_rate" class='readonlypricing' />
+                            <field name="commission_per" readonly="lock_price==True" />
+                        </group>
+                    </group>
+                    <group name="pricingbreakdown" string="Pricing breakdown">
+                        <field name="estimate_pricing_line_ids" string=""
+                            readonly="lock_price==True">
+                            <list editable="bottom">
+                                <field name="estimate_id" column_invisible="True" />
+                                <field
+                                    name="quantity"  />
+                                <field name="product_price_based_on_qty_summary" class="center_field1 readonlypricing" readonly="True" />
+                                <field name="hours_to_produce" class='readonlypricing'/>
+                                <field
+                                    name="product_types_summary" String="Material Cost"
+                                     class="center_field1 readonlypricing"  readonly="True" />
+                                <field name="unit_cost"  class='readonlypricing'/>
+                                <field name="selling_price"
+                                    column_invisible='1' class='readonlypricing'/>
+                                <field
+                                    name="selling_price_with_commission" string="Selling Price"
+                                    class="text-info fw-bold readonlypricing" />
+                                <field name="profit_margin" />
+                                <field
+                                    name="total_profit"  class='readonlypricing'/>
+                                <field name="commission_amt"  class='readonlypricing'/>
+                                <field
+                                    name="unit_labor_rate" class='readonlypricing' />
+                                <field name="unit_setup_cost"  class='readonlypricing'/>
+                                <field
+                                    name="unit_burden_rate" class='readonlypricing'/>
+                                <!--<field
+                                name="avg_hourly"/>-->
+                            </list>
+                        </field>
+                    </group>
+                    <group string="Engineering">
+                        <group>
+                            <field name="partner_id" string="Customer" />
+                            <field name="revision" />
+                            <field name="drawing_link" widget="url"  string="Drawing Link URL"/>
+                            <field name="part_weight" />
+                            <field name="misc_tooling_charge" />
+                            <field name="misc_tooling_description" />
+                            <field name="routed_by" />
+                            <field name="date_routed" />
+                        </group>
+                        <group>
+                            <group string="Bar Calculator">
+                                <field name="number_of_bars" readonly="True"  class='readonlypricing'/>
+                                <field name="bar_size" />
+                                <field name="tool_bar" string="Tool Overall length" />
+                                <field name="result" class='readonlypricing' />
+                                <field name="result_rounded_lowest" class='readonlypricing' />
+                                <!--<button name="calculate"
+                                    string="Calculate Pc Cost" type="object"
+                                    class="btn-primary" /> -->
+                            </group>
+                            <footer>
+
+                            </footer>
+                        </group>
+                    </group>
+                    <group string="Material">
+                        <field name="estimate_material_line_ids" string=""
+                            readonly="lock_price==True">
+                            <list editable="bottom">
+                                <field name="estimate_id" column_invisible="True" />
+                                <field name="product_id" />
+                                <field name="product_id" widget="custom_qty_at_date" options="{'date': '2023-10-25'}"/>                                
+                                <field name="product_type"  />
+                                <field name="vendor_id"  />
+                                <field  name="rfc_po_id" class="center_field1" /> 
+                                <field name="quantity" readonly="True" class="readonlypricing paddingright1" />
+                                <field name="unit" />
+                                <field name="pcs_unit_divided" sum="Total Pc unit Cost"
+                                    readonly="True" class="readonlypricing" />
+                                <field name="unit_cost" sum="Total Unit Cost" readonly="True" class="readonlypricing"/>
+
+                            </list>
+                        </field>
+                    </group>
+                    <group name="note_group" col="6" class="mt-2 mt-md-0">
+                        <group class="oe_subtotal_footer" colspan="4">
+                            <label for="total_unit_cost" string="Total Unit Cost" />
+                            <field name="total_unit_cost" nolabel="1" />
+                            <label for="total_pc_unit_cost" string="Total Pc Unit Cost" />
+                            <field name="total_pc_unit_cost" nolabel="1" />
+                        </group>
+                    </group>
+                    <group string="Routing">
+                        <field name="work_center_ids" string="" readonly="lock_price==True">
+                            <list editable="bottom">
+                                <field name="estimate_id" column_invisible="True" />
+                                <field name="workcenter_id" />
+                                <field name="setup_time" sum="Total Setup Time" />
+                                <field name="setup_unit" force_save="True" readonly="True" />
+                                <field name="cycle_time" sum="Total Cycle Time" />
+                                <field name="cycle_unit" force_save="True" readonly="True" />
+                                <field name="setup_rate_amt" sum="Total Setup Rate" />
+                                <field name="cycle_rate_amt" sum="Total Cycle Rate" />
+                                <field name="burden_rate_amt" sum="Total Burden Rate" />
+                                <field name="labor_rate" sum="Total Labor Rate" />
+                            </list>
+                        </field>
+                    </group>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+
+        <record id="view_estimate_material_line_form" model="ir.ui.view">
+            <field name="name">estimate.material.line.form</field>
+            <field name="model">estimate.material.line</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <!-- ... other fields ... -->
+                        <field name="display_qty_widget" invisible="1"/>
+                        <field name="qty_available_today" widget="qty_at_date_widget"/>
+                        <!-- ... other fields ... -->
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+     <template id="custom_css_inclusion3" inherit_id="web.layout">
+            <xpath expr="." position="inside">
+                <style>
+                    .custom_margin_button {
+                    margin: 10px 15px;
+                    padding: 10px 25px !important;
+                    }
+
+                    .center_field1 {
+                    text-align:center !important;
+                    }
+
+                    .readonlypricing {
+                        background-color:lightgray !important;
+                    }
+                    .paddingright1{
+                        padding-right: 10px !important;
+                    }
+                </style>
+            </xpath>
+        </template>
+
+    <record id="action_customer_estimate" model="ir.actions.act_window">
+        <field name="name">Estimates</field>
+        <field name="res_model">customer.estimate</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+    </record>
+
+
+    <menuitem id="root_menu_estimate" name="Estimates" sequence="1"/>
+    <menuitem id="menu_estimate" parent="root_menu_estimate" name="Estimates" sequence="1"
+        action="action_customer_estimate" />
+
+
+</odoo>

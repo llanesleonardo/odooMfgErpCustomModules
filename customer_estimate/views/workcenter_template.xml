@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="work_center_template_list" model="ir.ui.view">
+        <field name="name">workcenter.template.list</field>
+        <field name="model">workcenter.template</field>
+        <field name="arch" type="xml">
+            <list string="Estimate" sample="1" multi_edit="1">
+                <field name="name" />
+                <field name="setup_time" />
+                <field name="cycle_time" />
+                <field name="setup_rate" />
+                <field name="cycle_rate" />
+                <field name="burden_rate" />
+                <field name="labor_rate" />
+            </list>
+        </field>
+    </record>
+
+    <record id="work_center_template_form" model="ir.ui.view">
+        <field name="name">workcenter.template.form</field>
+        <field name="model">workcenter.template</field>
+        <field name="arch" type="xml">
+            <form string="Work Center">
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="setup_time" />
+                        <field name="cycle_time" />
+                        <field name="setup_rate" />
+                        <field name="cycle_rate" />
+                        <field name="burden_rate" />
+                        <field name="labor_rate" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_work_center_template" model="ir.actions.act_window">
+        <field name="name">Work Centers</field>
+        <field name="res_model">workcenter.template</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+    </record>
+
+    <menuitem id="menu_estimate_configuration" name="Work Centers" parent="root_menu_estimate" />
+    <menuitem id="menu_work_center_template" parent="menu_estimate_configuration" name="Work Centers"
+        sequence="2" action="action_work_center_template" />
+
+
+</odoo>

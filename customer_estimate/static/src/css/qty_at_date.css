@@ -1,0 +1,44 @@
+/* File: estimate/static/src/css/qty_at_date.css */
+
+.o_qty_at_date_widget {
+    display: inline-block;
+    margin-left: 8px;
+}
+
+.o_qty_at_date_widget .fa {
+    margin-right: 5px;
+}
+
+.o_qty_at_date_widget .text-success {
+    color: #28a745;
+}
+
+.o_qty_at_date_widget .text-danger {
+    color: #dc3545;
+}
+
+.o_qty_at_date_widget button {
+    padding: 0;
+    margin-left: 4px;
+    background: none;
+    border: none;
+    color: #00A09D;
+}
+
+.o_qty_at_date_widget button:hover {
+    color: #017e7b;
+    text-decoration: none;
+}
+
+.o_qty_at_date_widget button .fa-area-chart {
+    margin-right: 5px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+    .o_qty_at_date_widget {
+        display: block;
+        margin-top: 4px;
+        margin-left: 0;
+    }
+}

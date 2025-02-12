@@ -1,0 +1,34 @@
+<odoo>
+  <data noupdate="1">
+    <!-- Default Work Centers -->
+    <record id="workcenter_cutting" model="mrp.workcenter">
+      <field name="name">CUTOFF</field>
+      <field name="code">CUTOFF</field>
+      <field name="active">True</field>
+    </record>
+
+    <record id="workcenter_assembly" model="mrp.workcenter">
+      <field name="name">TC</field>
+      <field name="code">TC</field>
+      <field name="active">True</field>
+    </record>
+
+    <record id="workcenter_od" model="mrp.workcenter">
+      <field name="name">OD</field>
+      <field name="code">OD</field>
+      <field name="active">True</field>
+    </record>
+
+    <record id="workcenter_fluting" model="mrp.workcenter">
+      <field name="name">FLUTING</field>
+      <field name="code">FLUTING</field>
+      <field name="active">True</field>
+    </record>
+
+    <record id="workcenter_inspection" model="mrp.workcenter">
+      <field name="name">INSPECTION</field>
+      <field name="code">INSPECTION</field>
+      <field name="active">True</field>
+    </record>
+  </data>
+</odoo>

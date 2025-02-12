@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Your XML content here -->
+    </data>
+</odoo>
+
+<!-- 
+
+
+    <template id="assets_frontend" name="Customer Quote frontend assets" inherit_id="web.layout">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/customer_quote/static/src/js/create_mo_dialog.js"/>
+        </xpath>
+    </template>
+
+  <template id="assets" name="customer_quote assets" inherit_id="web.layout">
+        <xpath expr="//head" position="inside">
+        
+            <script type="text/javascript" src="/customer_quote/static/src/js/create_mo_dialog.js"/>
+            
+           CSS  <link rel="stylesheet" type="text/css" href="/customer_quote/static/src/css/create_mo_dialog.css"/>
+            
+        </xpath>
+    </template>
+-->

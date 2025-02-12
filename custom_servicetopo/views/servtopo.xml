@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+
+        <!-- 
+        <record id="mrp_production_form_view_custom" model="ir.ui.view">
+            <field name="name">mrp.production.form.view.custom</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                
+            </field>
+        </record>
+
+
+Inherit the mrp.production form view to add the 'Create PO' button per line -->
+
+
+        <template id="custom_css_inclusion2" inherit_id="web.layout">
+            <xpath expr="." position="inside">
+                <style>
+                    .custom_margin_button {
+                    margin: 10px 15px;
+                    padding: 10px 25px !important;
+                    }
+                </style>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>
+
+
+<!-- 
+                <xpath expr="//sheet/notebook" position="inside">
+                    <page string="Services" name="products_page">
+                        <field name="product_ids" widget="many2many_lines" 
+                               options="{'no_create': True}" 
+                               readonly="state in ['done', 'cancel']">
+                            <list editable="bottom">
+                                <field name="product_tmpl_id"  />
+                                <field name="type" context="{'default': 'product'}" />
+                                <field name="uom_name" context="{'default': 'product'}" />
+                                <field name="list_price" context="{'default': 'product'}" />
+                                <field name="standard_price" context="{'default': 'product'}" />
+                                <field name="seller_ids" widget="many2many_tags" context="{'default': 'product','display_name': 'name'}" options="{'no_create': True}" />
+                                <button name="action_create_po"
+                                type="object"
+                                string="Create PO"
+                                class="btn btn-primary oe_edit_only custom_margin_button"
+                                confirm="Are you sure you want to create a PO for this product?" />
+                                  
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+-->

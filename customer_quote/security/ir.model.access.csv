@@ -1,0 +1,4 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+access_customer_quote,access_customer_quote,model_customer_quote,base.group_user,1,1,1,1
+access_customer_quote_lines,access_customer_quote_lines,model_customer_quote_lines,base.group_user,1,1,1,1
+access_create_mo_wizard,access_create_mo_wizard,model_create_mo_wizard,base.group_user,1,1,1,1

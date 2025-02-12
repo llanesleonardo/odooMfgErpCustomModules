@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_product_estimate_custom_tab" model="ir.ui.view">
+        <field name="name">product.estimate.custom.tab</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view" />
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='type']" position="after">
+                <field name="type_of_good"/>
+            </xpath>
+
+
+            <notebook position="inside">
+                        <page string="Related Quotes">
+                            <field name="quote_ids" readonly="True">
+                                <list>
+                                    <field name="name" string="Quote Name"/>
+                                </list>
+                            </field>
+                        </page>
+                <page string="Product Estimate relationship">
+                    <group>
+                        <field name="estimate_ids" readonly='True'>
+                            <list>
+                                <field name="name" string="Estimate Name" />
+                                <field name="create_date" string="Creation Date" />
+                            </list>
+                        </field>
+
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+<record id="product_template_form_view_inherit" model="ir.ui.view">
+    <field name="name">product.template.common.form.inherit</field>
+    <field name="model">product.template</field>
+    <field name="inherit_id" ref="product.product_template_form_view"/>
+    <field name="arch" type="xml">
+        <xpath expr="//group[@name='operations']" position="before">
+            <group string="Location Information">
+                <field name="warehouse_location"/>
+                <field name="lot_location"/>
+                <field name="bin_location"/>
+            </group>
+        </xpath>
+    </field>
+</record>
+
+
+<record id="view_product_template_tree_inherited" model="ir.ui.view">
+    <field name="name">product.template.tree.inherited</field>
+    <field name="model">product.template</field>
+    <field name="inherit_id" ref="product.product_template_tree_view"/>
+    <field name="arch" type="xml">
+        <xpath expr="//field[@name='name']" position="after">
+            <field name="warehouse_location" optional="show"/>
+            <field name="lot_location" optional="show"/>
+            <field name="bin_location" optional="show"/>
+        </xpath>
+    </field>
+</record>
+
+</odoo>

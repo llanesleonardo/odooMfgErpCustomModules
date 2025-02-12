@@ -1,0 +1,151 @@
+<odoo>
+    <template id="report_estimates">
+        <t t-call="web.html_container">
+            <t t-set="data_report_margin_top" t-value="10" />
+            <div class="page">
+                <!-- Report Title -->
+                <h1 style="text-align: left; font-size: 24px; margin-bottom: 10px;">
+                    Cost Estimate Report
+                </h1>
+                <h3 style="text-align: left; font-size: 18px; margin-bottom: 10px;">
+                    Special carbide Tools
+                </h3>
+                <hr />
+                <div style="border:2px solid: border-color:black;">
+                    <t t-if="len(docs) == 1">
+                        <t t-set="doc" t-value="docs[0]" />
+                        <div class="page">
+                            <table class="table table-bordered"
+                                style="width:100%; border:1px solid black;">
+                                <tr>
+                                    <td style="width: 300px;">
+                                        <p style="font-weight:bold;">Part No: <span
+                                                t-field="doc.name" /></p>
+                                        <p style="font-weight:bold;">Descrip: <span
+                                                t-field="doc.part_description" /></p>
+                                        <p style="font-weight:bold;">Customer: <span
+                                                t-field="doc.partner_id" />
+                                        </p>
+                                        <p style="font-weight:bold;">Estimator: <span
+                                                t-field="doc.routed_by" /></p>
+                                        <p style="font-weight:bold;">Part Notes: <span
+                                                t-field="doc.part_notes" /></p>
+                                    </td>
+                                    <td style="width: 300px;">
+                                        <p style="font-weight:bold;">Alt Part No:: <span
+                                                t-field="doc.name" /></p>
+                                        <p style="font-weight:bold;">Drawing number: <span
+                                                t-field="doc.drawing_link" /></p>
+                                        <p style="font-weight:bold;">Revision: <span
+                                                t-field="doc.revision" /></p>
+                                        <p style="font-weight:bold;">Revision Date: <span
+                                                t-field="doc.date_routed" /></p>
+                                        <p style="font-weight:bold;">Billing Rate: <span
+                                                t-field="doc.pricing_method" /></p>
+                                    </td>
+                                </tr>
+                            </table>
+                            <h3 style="text-align: center; font-size: 18px; margin-top:10px">Summary
+                                of Pricing</h3>
+                            <!-- Other fields -->
+                            <div>
+                                <table class="table table-bordered"
+                                    style="width:100%; border:1px solid black; border-collapse: collapse;">
+                                    <thead style="background-color:lightgray">
+                                        <tr>
+                                            <th style="border-bottom: 1px solid black;">Qty</th>
+                                            <th style="border-bottom: 1px solid black;">Hrs</th>
+                                            <th style="border-bottom: 1px solid black;">Material
+                                                Cost</th>
+                                            <th style="border-bottom: 1px solid black;">Total Cost</th>
+                                            <!--<th
+                                            style="border-bottom: 1px solid black;">Price</th>-->
+                                            <th style="border-bottom: 1px solid black;">Selling
+                                                Price</th>
+                                            <th style="border-bottom: 1px solid black;">Profit
+                                                Margin</th>
+                                            <th style="border-bottom: 1px solid black;">Total Profit</th>
+                                            <!-- <th style="border-bottom: 1px solid black;">Set up
+                                            Rate</th>
+                                            <th style="border-bottom: 1px solid black;">Labor Rate</th>
+                                            <th style="border-bottom: 1px solid black;">Burder Rate</th>-->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="doc.estimate_pricing_line_ids" t-as="line">
+                                            <tr>
+                                                <td
+                                                    style="border-bottom: 1px solid black; text-align: center; vertical-align: middle;">
+                                                    <span t-field="line.quantity"
+                                                        t-options='{"precision": 2}' />
+                                                </td>
+                                                <td
+                                                    style="border-bottom: 1px solid black; text-align: center; vertical-align: middle;">
+                                                    <span t-field="line.hours_to_produce"
+                                                        t-options='{"precision": 2}' /> /HRS </td>
+                                                <td
+                                                    style="border-bottom: 1px solid black;text-align: center;  vertical-align: middle;">
+                                                    <span t-field="line.product_types_summary"
+                                                        t-options='{"precision": 2}' /> /EA </td>
+                                                <td
+                                                    style="border-bottom: 1px solid black; text-align: center; vertical-align: middle;">
+                                                    <span t-field="line.unit_cost"
+                                                        t-options='{"precision": 2}' /> /EA </td>
+                                                <!--     <td
+                                                    style="border-bottom: 1px solid black; text-align: center; vertical-align: middle;">
+                                                    <span t-field="line.selling_price"
+                                                        t-options='{"precision": 2}' /> /EA </td>-->
+                                                <td
+                                                    style="border-bottom: 1px solid black; text-align: center; vertical-align: middle;">
+                                                    <span
+                                                        t-field="line.selling_price_with_commission"
+                                                        t-options='{"precision": 2}' /> /EA </td>
+                                                <td
+                                                    style="border-bottom: 1px solid black; text-align: center; vertical-align: middle;">
+                                                    <span t-field="line.profit_margin" /> % </td>
+                                                <td
+                                                    style="border-bottom: 1px solid black; text-align: center; vertical-align: middle;">
+                                                    <span t-field="line.total_profit"
+                                                        t-options='{"precision": 2}' /> /JOB </td>
+                                                <!--          <td
+                                                    style="border-bottom: 1px solid black; text-align: center; vertical-align: middle;">
+                                                    <span t-field="line.unit_setup_cost"
+                                                        t-options='{"precision": 2}' /> /EA </td>
+                                                <td
+                                                    style="border-bottom: 1px solid black; text-align: center; vertical-align: middle;">
+                                                    <span t-field="line.unit_labor_rate"
+                                                        t-options='{"precision": 2}' /> /EA </td>
+
+                                                <td
+                                                    style="border-bottom: 1px solid black; text-align: center; vertical-align: middle;">
+                                                    <span t-field="line.unit_burden_rate"
+                                                        t-options='{"precision": 2}' /> /EA </td>-->
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <p>This report is designed for a single record.</p>
+                    </t>
+                </div>
+
+            </div>
+        </t>
+    </template>
+
+
+    <record id="action_report_customer_estimate" model="ir.actions.report">
+        <field name="name">Estimate</field>
+        <field name="model">customer.estimate</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">customer_estimate.report_estimates</field>
+        <field name="report_file">customer_estimate.report_estimates</field>
+        <field name="print_report_name">'Estimate - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="model_customer_estimate" />
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>
